@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./tailwind.config.js"></script>
+    <style>
+        body {
+            position: relative;
+            width: 100%;
+            background: #F6F7F8 0% 0% no-repeat padding-box;
+        }
+
+        .navbar {
+            background: #FFFFFF 0% 0% no-repeat padding-box;
+        }
+
+        .nav-link {
+            width: 122px;
+            height: 41px;
+            border-radius: 41px;
+        }
+
+        .active {
+            background: #01F0D0 0% 0% no-repeat padding-box;
+        }
+    </style>
+</head>
+
+<body class="top-0 left-0 opacity-100 p-[18px]">
+    <header>
+        <div class="navbar h-[72px] rounded-[70px] px-8 py-3">
+            <nav class="flex justify-between items-center">
+                <img src="./assets/img/TestLogo.svg" alt="logo" class="w-[258px] h-[48px]" />
+
+                <div class="hidden lg:flex lg:gap-x-2">
+                    <a href="#"
+                        class="flex gap-2 nav-link justify-center items-center text-sm font-semibold leading-6 text-gray-900">
+                        <img src="./assets/img/home.svg" alt="overview" class="w-[15.51px] h-17px" />
+                        <span>Overview</span>
+                    </a>
+                    <a href="#"
+                        class="flex gap-2 nav-link active justify-center items-center text-sm font-semibold leading-6 text-gray-900">
+                        <img src="./assets/img/group.svg" alt="patients" class="w-[15.51px] h-17px" />
+                        <span>Patients</span>
+                    </a>
+                    <a href="#"
+                        class="flex gap-2 nav-link justify-center items-center text-sm font-semibold leading-6 text-gray-900">
+                        <img src="./assets/img/calendar.svg" alt="schedule" class="w-[15.51px] h-17px" />
+                        <span>Schedule</span>
+                    </a>
+                    <a href="#"
+                        class="flex gap-2 nav-link justify-center items-center text-sm font-semibold leading-6 text-gray-900">
+                        <img src="./assets/img/chat_bubble.svg" alt="message" class="w-[15.51px] h-17px" />
+                        <span>Message</span>
+                    </a>
+                    <a href="#"
+                        class="flex gap-2 nav-link justify-center items-center text-sm font-semibold leading-6 text-gray-900">
+                        <img src="./assets/img/credit_card.svg" alt="transactions" class="w-[15.51px] h-17px" />
+                        <span>Transactions</span>
+                    </a>
+                </div>
+
+                <div class="right-side">
+                    <div class="flex gap-1 items-center">
+                        <img src="./assets/img/senior-woman-doctor.png" class="w-[44px] h-[44px]" alt="profile" />
+                        <div class="flex flex-col">
+                            <p class="text-sm">Dr. Jose Simmons</p>
+                            <span class="text-sm text-gray-500">General Practitioner</span>
+                        </div>
+                        <img src="./assets/img/settings_FILL0_wght300_GRAD0_opsz24.svg" class="mx-4 w-[18px] h-[20px]"
+                            alt="setting" />
+                        <img src="./assets/img/more_vert_FILL0_wght300_GRAD0_opsz24.svg" class="w-[4px] h-[18px]"
+                            alt="more" />
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex gap-6 mt-6">
+        <aside>
+            <div id="sidebar" class="bg-white w-[317px] p-5 rounded-xl">
+                <div class="flex justify-between">
+                    <h3 class="font-semibold">Patients</h3>
+                    <img src="./assets/img/search_FILL0_wght300_GRAD0_opsz24.svg" alt="search" />
+                </div>
+
+                <div id="patient-list" class="flex flex-col gap-6 max-h-[550px] mt-4 overflow-y-auto w-full">
+                </div>
+            </div>
+        </aside>
+        <section>
+            <div class="bg-white w-[717px] p-5 rounded-xl h-auto">
+                <canvas id="myChart"></canvas>
+            </div>
+        </section>
+
+        <section>
+            <div class="bg-white w-[317px] p-5 h-auto rounded-xl">
+                <div class="flex justify-center mb-4" id="selected-patient-loader">
+                    <div class="inline-block p-6 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
+                        role="status">
+                        <span
+                            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
+                    </div>
+                </div>
+                <div id="selected-patient" class="hidden flex flex-col gap-4">
+                    <div class="w-full flex flex-col items-center gap-2 mb-4">
+                        <img id="profile_picture" src="./assets/img/Layer.png" alt="profile-pic"
+                            class="w-[200px] h-[200px] rounded-[50%]" />
+                        <h2 class="font-semibold" id="name"></h2>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <img src="./assets/img/BirthIcon.svg" class="w-[42px] h-[42px]" alt="date_of_birth" />
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-500">Date of Birth</span>
+                            <p class="text-sm" id="date_of_birth"></p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <img src="./assets/img/FemaleIcon.svg" class="w-[42px] h-[42px]" alt="gender" />
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-500">Gender</span>
+                            <p class="text-sm" id="gender"></p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <img src="./assets/img/PhoneIcon.svg" class="w-[42px] h-[42px]" alt="phone_number" />
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-500">Contact Info.</span>
+                            <p class="text-sm" id="phone_number"></p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <img src="./assets/img/PhoneIcon.svg" class="w-[42px] h-[42px]" alt="emergency_contact" />
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-500">Emergency Contacts</span>
+                            <p class="text-sm" id="emergency_contact"></p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <img src="./assets/img/InsuranceIcon.svg" class="w-[42px] h-[42px]" alt="insurance_type" />
+                        <div class="flex flex-col">
+                            <span class="text-sm text-gray-500">Insurance Provider</span>
+                            <p class="text-sm" id="insurance_type"></p>
+                        </div>
+                    </div>
+
+                    <button type="button"
+                        class="flex w-full bg-[#01F0D0] justify-center rounded-full px-3 py-2 mt-4 text-sm font-semibold leading-6 shadow-sm">Show
+                        All Information</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script src="./user.js"></script>
+</html>
